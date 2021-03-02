@@ -16,11 +16,11 @@ class Category(models.Model):
 
 class Post(models.Model):
     """Post in blog"""
-    category = models.ForeignKey(Category, verbose_name='Категория')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     title = models.CharField(max_length=255, verbose_name='Название поста')
     slug = models.SlugField(unique=True, verbose_name='Слаг поста')
     content = models.TextField(verbose_name='Контент')
-    creating_at = models.DateTimeField(auto_created=True, verbose_name='Дата и время создания')
+    creating_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания')
     image = models.ImageField(verbose_name='Заглавная фотография')
 
     def __str__(self):

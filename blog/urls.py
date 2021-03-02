@@ -1,6 +1,7 @@
 from django.urls import path
 
-from blog.views import BaseView
+from blog.views import BaseView, CategoryDetailView, PostDetailView
+
 
 urlpatterns = [
     path('', BaseView.as_view(), name='base'),
