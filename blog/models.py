@@ -10,8 +10,8 @@ class Category(models.Model):
     def __str__(self):
         return f'Категория {self.name}'
 
-    # def get_absolute_url(self):
-    #     return reverse()
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
 
 class Post(models.Model):
@@ -25,3 +25,6 @@ class Post(models.Model):
 
     def __str__(self):
         return f'Пост {self.title}'
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'slug': self.slug})
