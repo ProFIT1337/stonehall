@@ -9,11 +9,10 @@ class BaseView(View):
 
     def get(self, request, *args, **kwargs):
         main_posts = get_posts_for_main_page()
-        print(main_posts)
         context = {
             'posts': main_posts
         }
-        return render(request, 'base.html', context)
+        return render(request, 'team.html', context)
 
 
 class CategoryDetailView(DetailView):
