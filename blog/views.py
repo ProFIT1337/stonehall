@@ -2,12 +2,18 @@ from django.shortcuts import render
 from django.views.generic import View, DetailView
 
 from blog.models import Category, Post
+from blog.services import get_posts_for_main_page
 
 
 class BaseView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'base.html', {})
+        main_posts = get_posts_for_main_page()
+        print(main_posts)
+        context = {
+            'posts': main_posts
+        }
+        return render(request, 'base.html', context)
 
 
 class CategoryDetailView(DetailView):
