@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, DetailView, ListView
 
-from blog.models import Category, Post
+from blog.models import Post
 from blog.services import get_posts_for_main_page
 
 
@@ -21,6 +21,13 @@ class AboutView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'about.html', {})
+
+
+class ContactView(View):
+    """View with contact information"""
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'contact.html', {})
 
 
 class PostListView(ListView):
