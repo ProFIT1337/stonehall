@@ -295,23 +295,24 @@
                 </div>
             </div>
             <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
-                <h2 class="footer-heading">Request A Quote</h2>
+                <h2 class="footer-heading">Задайте вопрос</h2>
                 <form action="#" class="contact-form">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name">
+                        <input type="text" class="form-control" placeholder="Ваше имя">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Email">
+                        <input type="text" class="form-control" placeholder="Контактная информация">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Subject">
+                        <input type="text" class="form-control" placeholder="Тема">
                     </div>
                     <div class="form-group">
                         <textarea name="" id="" cols="30" rows="3" class="form-control"
-                                  placeholder="Message"></textarea>
+                                  placeholder="Сообщение"></textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="form-control submit px-3">Send</button>
+                        <button type="submit" class="form-control submit px-3">Отправить</button>
                     </div>
                 </form>
             </div>
