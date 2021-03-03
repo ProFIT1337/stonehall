@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View, DetailView
+from django.views.generic import View, DetailView, ListView
 
 from blog.models import Category, Post
 from blog.services import get_posts_for_main_page
@@ -21,6 +21,14 @@ class AboutView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'about.html', {})
+
+
+class ProjectsView(ListView):
+    """View with all posts"""
+    model = Post
+    context_object_name = 'Post'
+    queryset = Post.objects.all()
+    template_name = 'post_list.html'
 
 
 class CategoryDetailView(DetailView):

@@ -47,7 +47,8 @@
                 <li class="nav-item {% if request.path == '/о-нас/' %}active{% endif %}"><a href="{% url 'about' %}"
                                                                                             class="nav-link">О нас</a>
                 </li>
-                <li class="nav-item {% if request.path == '/проекты/' %}active{% endif %}"><a href="#" class="nav-link">Проеты</a>
+                <li class="nav-item {% if request.path == '/проекты/' %}active{% endif %}"><a
+                        href="{% url 'projects' %}" class="nav-link">Проеты</a>
                 </li>
                 <li class="nav-item {% if request.path == '/контакты' %}active{% endif %}"><a href="#" class="nav-link">Контакты</a>
                 </li>
