@@ -8,3 +8,7 @@ urlpatterns = [
     path('категория/<int:pk>/', CategoryDetailView.as_view(), name='category_detail'),
     path('пост/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
 ]
+
+# about о-нас
+# projects проекты
+# contacts - контакты

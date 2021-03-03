@@ -12,7 +12,7 @@ class BaseView(View):
         context = {
             'posts': main_posts
         }
-        return render(request, 'team.html', context)
+        return render(request, 'base.html', context)
 
 
 class CategoryDetailView(DetailView):
