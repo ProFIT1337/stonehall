@@ -23,20 +23,13 @@ class AboutView(View):
         return render(request, 'about.html', {})
 
 
-class ProjectsView(ListView):
+class PostListView(ListView):
     """View with all posts"""
     model = Post
     context_object_name = 'Post'
     queryset = Post.objects.all()
     template_name = 'post_list.html'
 
-
-class CategoryDetailView(DetailView):
-    """View of one specific category"""
-    model = Category
-    context_object_name = 'category'
-    template_name = 'category_detail.html'
-    slug_url_kwarg = 'slug'
 
 
 class PostDetailView(DetailView):
