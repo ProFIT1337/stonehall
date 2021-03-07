@@ -20,9 +20,12 @@
                        class="list-group-item list-group-item-action {% if request.path == '/администрирование/новый-пост/' %}active{% endif %}">Создать
                         новый пост</a>
                     <a href="{% url 'administration_edit_post' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/изменить-пост/' %}active{% endif %}">Изменить пост</a>
+                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/изменить-пост/' %}active{% endif %}">Изменить
+                        пост</a>
                     <a href="{% url 'administration_feedback' %}"
                        class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Фидбек</a>
+                    <a href="{% url 'logout' %}"
+                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Выйти из аккаунта</a>
                 </div>
             </div>
 

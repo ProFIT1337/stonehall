@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from administration.views import \
@@ -10,6 +11,7 @@ from administration.views import \
 
 urlpatterns = [
     path('', AdministrationBaseView.as_view(), name='administration_base'),
+    path('выйти/', LogoutView.as_view(next_page='/'), name='logout'),
     path('новый-пост/', NewPostView.as_view(), name='administration_new_post'),
     path('фидбек/', FeedbackView.as_view(), name='administration_feedback'),
     path('фидбек-отвечено/<int:pk>/', FeedbackAnsweredView.as_view(), name='administration_feedback_answered'),
