@@ -77,17 +77,3 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form
         return context
-
-
-
-class PostDetailView(DetailView):
-    """View of one specific post"""
-    model = Post
-    context_object_name = 'post'
-    template_name = 'post_detail.html'
-    slug_url_kwarg = 'slug'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.form
-        return context
