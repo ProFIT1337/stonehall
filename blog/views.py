@@ -47,7 +47,7 @@ class ContactView(View):
         if bound_form.is_valid():
             new_question = bound_form.save()
             messages.add_message(request, messages.SUCCESS,
-                                 'Мы получили ваше обращение. Ожидайте, мы скоро с вами свяжемся')
+                                 'Мы получили ваше сообщение. Ожидайте, мы скоро с вами свяжемся')
             return HttpResponseRedirect('/контакты')
         context = {
             'form': bound_form,
