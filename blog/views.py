@@ -1,8 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, DetailView, ListView
 
+from blog.forms import LoginForm
 from blog.models import Post
 from blog.services import get_posts_for_main_page
 from question.forms import QuestionForm
@@ -67,7 +69,24 @@ class PostListView(ListView):
         context['form'] = self.form
         return context
 
+
 class LoginView(View):
     """View with user login form"""
 
-    pass
+    def get(self, request, *args, **kwargs):
+        """When login page is called by method GET"""
+        form = LoginForm(request.POST or None)
+        context = {'form': form}
+        return render(request, 'login.html', context)
+
+    def post(self, request, *args, **kwargs):
+        """When login page is called by method POST"""
+        form = LoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return HttpResponseRedirect('/')
+        return render(request, 'login.html', {'form': form})

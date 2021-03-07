@@ -295,28 +295,32 @@
                 </div>
             </div>
             <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
-                <h2 class="footer-heading">Задайте вопрос</h2>
-                <form action="{% url 'contact' %}" class="contact-form" method="post">
-                    {% csrf_token %}
 
-                    {% for field in form %}
+                {% block feedback %}
+                    <h2 class="footer-heading">Задайте вопрос</h2>
+                    <form action="{% url 'contact' %}" class="contact-form" method="post">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                            <div class="form-group">
+
+                                {% if field.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+
+                                {{ field }}
+
+                            </div>
+                        {% endfor %}
+
                         <div class="form-group">
-
-                            {% if field.errors %}
-                                <div class="alert alert-danger">
-                                    {{ field.errors }}
-                                </div>
-                            {% endif %}
-
-                            {{ field }}
-
+                            <button type="submit" class="form-control submit px-3">Отправить</button>
                         </div>
-                    {% endfor %}
+                    </form>
+                {% endblock %}
 
-                    <div class="form-group">
-                        <button type="submit" class="form-control submit px-3">Отправить</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
