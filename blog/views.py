@@ -20,22 +20,6 @@ class BaseView(View):
         }
         return render(request, 'base.html', context)
 
-    def post(self, request, *args, **kwargs):
-        bound_form = QuestionForm(request.POST)
-
-        if bound_form.is_valid():
-            new_question = bound_form.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Мы получили ваше сообщение. Ожидайте, мы скоро с вами свяжемся')
-            return HttpResponseRedirect('/')
-
-        main_posts = get_posts_for_main_page()
-        context = {
-            'posts': main_posts,
-            'form': bound_form,
-        }
-        return render(request, 'base.html', context)
-
 
 class AboutView(View):
     """View with information about firm"""
