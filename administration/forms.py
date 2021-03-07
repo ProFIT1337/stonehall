@@ -4,14 +4,17 @@ from blog.models import Post
 from question.models import Question
 
 
-class NewPostForm(forms.ModelForm):
-    """Form for creating new post"""
+class PostForm(forms.ModelForm):
+    """Model post form, if image uploaded"""
 
     class Meta:
         model = Post
         fields = ['title', 'short_description', 'image', 'is_on_main_page']
 
 
-# class FeedbackForm(forms.Form):
-#     """Feedback form in administration page"""
-#
+class PostWithoutImageForm(forms.ModelForm):
+    """Model post form, if image don`t changed"""
+
+    class Meta:
+        model = Post
+        fields = ['title', 'short_description', 'is_on_main_page']

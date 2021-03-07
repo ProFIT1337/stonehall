@@ -54,7 +54,7 @@
                         href="{% url 'contact' %}" class="nav-link">Контакты</a>
                 </li>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item {% if request.path == '/администрирование/' %}active{% endif %}"><a
+                    <li class="nav-item {% if '/администрирование/' in request.path %}active{% endif %}"><a
                             href="/администрирование/" class="nav-link">Администрирование</a>
                     </li>
                 {% endif %}
