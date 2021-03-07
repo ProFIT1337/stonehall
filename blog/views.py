@@ -55,7 +55,15 @@ class ContactView(View):
         }
         return render(request, 'contact.html', context)
 
-
+    def post(self, request, *args, **kwargs):
+        bound_form = QuestionForm(request.POST)
+        if bound_form.is_valid():
+            new_question = bound_form.save()
+            return HttpResponseRedirect('/контакты')
+        context = {
+            'form': bound_form,
+        }
+        return render(request, 'contact.html', context)
 
 
 class PostListView(ListView):

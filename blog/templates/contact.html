@@ -28,35 +28,31 @@
                             <div class="col-md-12">
                                 <div class="contact-wrap w-100 p-md-5 p-4">
                                     <h3 class="mb-4">Напишите нам</h3>
-                                    <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+                                    <form action="{% url 'contact' %}" method="post" id="contactForm" name="contactForm" class="contactForm">
                                         {% csrf_token %}
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="label" for="name">Имя</label>
-                                                    <input type="text" class="form-control" name="name" id="name"
-                                                           placeholder="Ваше имя">
+                                                    {{ form.sender_name }}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="label" for="contactInformation">Как с вами связаться</label>
-                                                    <input type="text" class="form-control" name="contactInformation" id="contactInformation"
-                                                           placeholder="Контактная информация">
+                                                    {{ form.sender_contact_information }}
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="label" for="subject">Тема</label>
-                                                    <input type="text" class="form-control" name="subject" id="subject"
-                                                           placeholder="Тема сообщения">
+                                                    {{ form.feedback_subject }}
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="label" for="#">Сообщение</label>
-                                                    <textarea name="message" class="form-control" id="message" cols="30"
-                                                              rows="4" placeholder="Текст вашего сообщения"></textarea>
+                                                    {{ form.feedback_text }}
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
