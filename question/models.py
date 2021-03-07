@@ -8,3 +8,4 @@ class Question(models.Model):
     feedback_subject = models.CharField(max_length=255, verbose_name='Тема обращения')
     feedback_text = models.TextField(verbose_name='Текст обращения')
     is_answered = models.BooleanField(default=False, verbose_name='На вопрос отвечено?')
+    creating_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время отправки обращения')

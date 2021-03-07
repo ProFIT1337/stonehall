@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Каменьхол - {% block title %}Главная{% endblock %}</title>
+    <title>КаменьХолл - {% block title %}Главная{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -48,7 +48,7 @@
                                                                                             class="nav-link">О нас</a>
                 </li>
                 <li class="nav-item {% if request.path == '/проекты/' %}active{% endif %}"><a
-                        href="{% url 'projects' %}" class="nav-link">Проеты</a>
+                        href="{% url 'projects' %}" class="nav-link">Проекты</a>
                 </li>
                 <li class="nav-item {% if request.path == '/контакты/' %}active{% endif %}"><a
                         href="{% url 'contact' %}" class="nav-link">Контакты</a>
