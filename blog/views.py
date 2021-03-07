@@ -66,3 +66,8 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form
         return context
+
+class LoginView(View):
+    """View with user login form"""
+
+    pass
