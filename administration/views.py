@@ -1,7 +1,7 @@
 from django.contrib import messages
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import View
 
 from administration.forms import PostForm, PostWithoutImageForm
@@ -10,17 +10,14 @@ from blog.services import get_all_posts, get_post_with_pk
 from question.services import get_all_questions, get_question_with_pk
 
 
-class AdministrationBaseView(View):
+class AdministrationBaseView(LoginRequiredMixin, View):
     """Base view for administration page"""
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return render(request, 'administration_base.html', {})
-        else:
-            return redirect('login')
+        return render(request, 'administration_base.html', {})
 
 
-class NewPostView(View):
+class NewPostView(LoginRequiredMixin, View):
     """Administration view with adding new post"""
 
     def get(self, request, *args, **kwargs):
@@ -38,7 +35,7 @@ class NewPostView(View):
         return render(request, 'administration_new_post.html', context)
 
 
-class FeedbackView(View):
+class FeedbackView(LoginRequiredMixin, View):
     """Administration view with feedback information"""
 
     def get(self, request, *args, **kwargs):
@@ -49,7 +46,7 @@ class FeedbackView(View):
         return render(request, 'administration_feedback.html', context)
 
 
-class FeedbackAnsweredView(View):
+class FeedbackAnsweredView(LoginRequiredMixin, View):
     """Endpoint for administration feedback form. Changes the value of the field is_answered?"""
 
     def post(self, request, *args, **kwargs):
@@ -62,7 +59,7 @@ class FeedbackAnsweredView(View):
         return HttpResponseRedirect('/администрирование/фидбек')
 
 
-class EditPostView(View):
+class EditPostView(LoginRequiredMixin, View):
     """Display all posts. The user can choose which post to change"""
 
     def get(self, request, *args, **kwargs):
@@ -73,7 +70,7 @@ class EditPostView(View):
         return render(request, 'administration_display_all_posts.html', context)
 
 
-class EditSpecificPostView(View):
+class EditSpecificPostView(LoginRequiredMixin, View):
     """Changing a specific post on the administration page"""
 
     def get(self, request, *args, **kwargs):
