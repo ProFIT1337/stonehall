@@ -5,7 +5,6 @@ from django.urls import reverse
 class Post(models.Model):
     """Post in blog"""
     title = models.CharField(max_length=255, verbose_name='Название поста')
-    content = models.TextField(verbose_name='Контент')
     creating_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания')
     image = models.ImageField(verbose_name='Заглавная фотография')
     is_on_main_page = models.BooleanField(default=False, verbose_name='Должен ли пост отображаться на главной?')

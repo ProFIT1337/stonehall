@@ -8,5 +8,5 @@ urlpatterns = [
     path('проекты/', PostListView.as_view(), name='projects'),
     path('контакты/', ContactView.as_view(), name='contact'),
     path('логин/', LoginView.as_view(), name='login'),
-    # path('админинистрирование/', include(), name='admin')
+    path('администрирование/', include('administration.urls'))
 ]

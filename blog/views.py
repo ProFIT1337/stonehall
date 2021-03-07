@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import View, DetailView, ListView
+from django.views.generic import View, ListView
 
 from blog.forms import LoginForm
 from blog.models import Post
