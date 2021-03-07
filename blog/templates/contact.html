@@ -21,6 +21,13 @@
 
     <section class="ftco-section">
         <div class="container">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="wrapper">
@@ -28,7 +35,8 @@
                             <div class="col-md-12">
                                 <div class="contact-wrap w-100 p-md-5 p-4">
                                     <h3 class="mb-4">Напишите нам</h3>
-                                    <form action="{% url 'contact' %}" method="post" id="contactForm" name="contactForm" class="contactForm">
+                                    <form action="{% url 'contact' %}" method="post" id="contactForm" name="contactForm"
+                                          class="contactForm">
                                         {% csrf_token %}
                                         <div class="row">
                                             <div class="col-md-6">
@@ -39,7 +47,8 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="label" for="contactInformation">Как с вами связаться</label>
+                                                    <label class="label" for="contactInformation">Как с вами
+                                                        связаться</label>
                                                     {{ form.sender_contact_information }}
                                                 </div>
                                             </div>

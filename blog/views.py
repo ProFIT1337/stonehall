@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, DetailView, ListView
@@ -24,6 +25,8 @@ class BaseView(View):
 
         if bound_form.is_valid():
             new_question = bound_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Мы получили ваше сообщение. Ожидайте, мы скоро с вами свяжемся')
             return HttpResponseRedirect('/')
 
         main_posts = get_posts_for_main_page()
@@ -59,6 +62,8 @@ class ContactView(View):
         bound_form = QuestionForm(request.POST)
         if bound_form.is_valid():
             new_question = bound_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Мы получили ваше обращение. Ожидайте, мы скоро с вами свяжемся')
             return HttpResponseRedirect('/контакты')
         context = {
             'form': bound_form,
