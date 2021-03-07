@@ -1,0 +1,39 @@
+{% extends 'administration_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block form %}
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Контактная информация</th>
+                <th scope="col">Тема</th>
+                <th scope="col">Текст</th>
+                <th scope="col">Отвечено?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td>{{ question.created_at }}.</td>
+                    <td>{{ question.sender_name }}.</td>
+                    <td>{{ question.sender_contact_information }}.</td>
+                    <td>{{ question.feedback_subject }}.</td>
+                    <td>{{ question.feedback_text }}.</td>
+                    <td>
+                        <form action="{% url 'administration_feedback_answered' pk=question.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="checkbox" class="form-control" name="is_answered" style="width: 70px;" min="1"
+                                   {% if question.is_answered %}checked{% endif %}>
+                            <br>
+                            <input type="submit" class="btn btn-primary" value="Сохранить">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

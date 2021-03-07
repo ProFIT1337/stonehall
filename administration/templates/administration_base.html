@@ -3,25 +3,27 @@
 {% block title %}Администрирование{% endblock %}
 
 {% block content %}
-<div class="container mb-3">
-    <h3 class="text-center mt-3">Администрирование сайта</h3>
-    <hr>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="list-group">
-                <a href="{% url 'administration_new_post' %}"
-                   class="list-group-item list-group-item-action {% if request.path == '/администрирование/новый-пост/' %}active{% endif %}">Создать
-                    новый пост</a>
+    <div class="container mb-3">
+        <h3 class="text-center mt-3">Администрирование сайта</h3>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a href="{% url 'administration_new_post' %}"
+                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/новый-пост/' %}active{% endif %}">Создать
+                        новый пост</a>
+                    <a href="{% url 'administration_feedback' %}"
+                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Фидбек</a>
+                </div>
+            </div>
+
+            <div class="col-md-8 mb-3">
+                {% block form %}
+
+                {% endblock %}
             </div>
         </div>
-
-        <div class="col-md-8 mb-3">
-            {% block form %}
-
-            {% endblock %}
-        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block feedback %}
