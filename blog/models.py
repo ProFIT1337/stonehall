@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.safestring import mark_safe
+from markdown import markdown
 
 
 class Post(models.Model):
@@ -17,3 +19,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk})
+
+    def get_content_as_markdown(self):
+        return mark_safe(markdown(self.content, safe_mode='escape'))

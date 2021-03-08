@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_link %}
+    
+    {% endblock %}
 </head>
 <body>
 <div class="container pt-5">
@@ -246,7 +249,7 @@
                                 <div class="modal-body">
                                    <div class="row">
                                        <div class="col-4"><img class="img-fluid" src="{{ post.image.url }}" alt=""></div>
-                                       <div class="col-8">{{ post.content }}</div>
+                                       <div class="col-8">{{ post.get_content_as_markdown }}</div>
                                    </div>
                                 </div>
                                 <div class="modal-footer">
@@ -394,6 +397,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{% static 'js/google-map.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}
 
+{% endblock %}
 </body>
 </html>
