@@ -18,6 +18,7 @@ urlpatterns = [
     path('изменить-пост/', EditPostView.as_view(), name='administration_edit_post'),
     path('изменить-конкретный-пост/<int:pk>', EditSpecificPostView.as_view(), name='administration_edit_specific_post'),
     path('удалить-пост/', DeletePostView.as_view(), name='administration_delete_post'),
-    path('удалить-конкретный-пост/<int:pk>', DeleteSpecificPostView.as_view(), name='administration_delete_specific_post'),
+    path('удалить-конкретный-пост/<int:pk>', DeleteSpecificPostView.as_view(),
+         name='administration_delete_specific_post'),
 
 ]

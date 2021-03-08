@@ -1,8 +1,35 @@
-{% extends 'administration_display_all_posts_to_edit.html' %}
+{% extends 'administration_base.html' %}
 
-{% block inner_form %}
-    <form action="{% url 'administration_delete_specific_post' pk=post.pk %}" method="post">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Удалить">
-    </form>
+{% block form %}
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Название</th>
+                <th scope="col">Изображение</th>
+                <th scope="col">На главной странице?</th>
+                <th scope="col">Короткое описание</th>
+                <th scope="col">Удалить?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.created_at }}.</td>
+                    <td>{{ post.title }}.</td>
+                    <td class="w-25"><img src="{{ post.image.url }}" class="img-fluid"></td>
+                    <td>{% if post.is_on_main_page %}Да{% else %}Нет{% endif %} .</td>
+                    <td>{{ post.short_description }}.</td>
+                    <td>
+                        <form action="{% url 'administration_delete_specific_post' pk=post.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Удалить">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
