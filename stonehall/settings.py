@@ -70,9 +70,9 @@ WSGI_APPLICATION = 'stonehall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stonehall_db',
-        'USER': 'stonehall_user',
-        'PASSWORD': 'devpass',
+        'NAME': os.getenv('STONEHALL_DB_NAME'),
+        'USER': os.getenv('STONEHALL_DB_USER'),
+        'PASSWORD': os.getenv('STONEHALL_DB_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': 5432
     }
