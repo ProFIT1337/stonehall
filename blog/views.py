@@ -64,6 +64,8 @@ class PostListView(ListView):
     template_name = 'post_list.html'
     form = QuestionForm()
 
+    paginate_by = 9
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form
