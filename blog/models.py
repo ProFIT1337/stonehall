@@ -14,6 +14,9 @@ class Post(models.Model):
                                                                       'местах')
     content = models.TextField(verbose_name='Полное описание работы')
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return f'Пост {self.title}'
 
