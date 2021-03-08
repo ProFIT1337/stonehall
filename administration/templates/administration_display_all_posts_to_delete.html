@@ -1,5 +1,7 @@
 {% extends 'administration_base.html' %}
 
+{% load humanize %}
+
 {% block form %}
     <div class="col-md-12">
         <table class="table">
@@ -16,7 +18,7 @@
             <tbody>
             {% for post in posts %}
                 <tr>
-                    <td>{{ post.created_at }}.</td>
+                    <td>{{ post.created_at|naturaltime }}.</td>
                     <td>{{ post.title }}.</td>
                     <td class="w-25"><img src="{{ post.image.url }}" class="img-fluid"></td>
                     <td>{% if post.is_on_main_page %}Да{% else %}Нет{% endif %} .</td>

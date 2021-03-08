@@ -1,5 +1,7 @@
 {% extends 'administration_base.html' %}
 
+{% load humanize %}
+
 {% block form %}
     <div class="col-md-12">
         <table class="table">
@@ -16,7 +18,7 @@
             <tbody>
             {% for question in questions %}
                 <tr>
-                    <td>{{ question.created_at }}.</td>
+                    <td>{{ question.created_at|naturaltime }}.</td>
                     <td>{{ question.sender_name }}.</td>
                     <td>{{ question.sender_contact_information }}.</td>
                     <td>{{ question.feedback_subject }}.</td>
