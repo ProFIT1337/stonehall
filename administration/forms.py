@@ -1,7 +1,8 @@
 from django import forms
 
 from blog.models import Post
-from question.models import Question
+
+FIELDS_IN_POST_FORM = ['title', 'short_description', 'is_on_main_page']
 
 
 class PostForm(forms.ModelForm):
@@ -9,7 +10,8 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'short_description', 'image', 'is_on_main_page']
+        fields = FIELDS_IN_POST_FORM[:]
+        fields.append('image')
 
 
 class PostWithoutImageForm(forms.ModelForm):
@@ -17,4 +19,4 @@ class PostWithoutImageForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'short_description', 'is_on_main_page']
+        fields = FIELDS_IN_POST_FORM[:]
