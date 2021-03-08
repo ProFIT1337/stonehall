@@ -22,10 +22,12 @@
                     <a href="{% url 'administration_edit_post' %}"
                        class="list-group-item list-group-item-action {% if request.path == '/администрирование/изменить-пост/' %}active{% endif %}">Изменить
                         пост</a>
+                    <a href="{% url 'administration_delete_post' %}"
+                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/удалить-пост/' %}active{% endif %}">Удалить
+                        пост</a>
                     <a href="{% url 'administration_feedback' %}"
                        class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Фидбек</a>
-                    <a href="{% url 'logout' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Выйти из аккаунта</a>
+                    <a href="{% url 'logout' %}" class="list-group-item list-group-item-action">Выйти из аккаунта</a>
                 </div>
             </div>
 

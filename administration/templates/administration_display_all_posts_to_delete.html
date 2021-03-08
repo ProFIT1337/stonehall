@@ -1,0 +1,8 @@
+{% extends 'administration_display_all_posts_to_edit.html' %}
+
+{% block inner_form %}
+    <form action="{% url 'administration_delete_specific_post' pk=post.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Удалить">
+    </form>
+{% endblock %}

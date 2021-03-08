@@ -22,10 +22,14 @@
                     <td>{% if post.is_on_main_page %}Да{% else %}Нет{% endif %} .</td>
                     <td>{{ post.short_description }}.</td>
                     <td>
-                        <form action="{% url 'administration_edit_specific_post' pk=post.pk %}" method="get">
-                            {% csrf_token %}
-                            <input type="submit" class="btn btn-primary" value="Изменить">
-                        </form>
+
+                        {% block inner_form %}
+                            <form action="{% url 'administration_edit_specific_post' pk=post.pk %}" method="get">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-primary" value="Изменить">
+                            </form>
+                        {% endblock %}
+
                     </td>
                 </tr>
             {% endfor %}

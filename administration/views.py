@@ -67,7 +67,7 @@ class EditPostView(LoginRequiredMixin, View):
         context = {
             'posts': posts
         }
-        return render(request, 'administration_display_all_posts.html', context)
+        return render(request, 'administration_display_all_posts_to_edit.html', context)
 
 
 class EditSpecificPostView(LoginRequiredMixin, View):
@@ -102,3 +102,23 @@ class EditSpecificPostView(LoginRequiredMixin, View):
             'post': post
         }
         return render(request, 'administration_edit_specific_post.html', context)
+
+
+class DeletePostView(LoginRequiredMixin, View):
+    """Display all posts. The user can choose which post to delete"""
+
+    def get(self, request, *args, **kwargs):
+        posts = get_all_posts()
+        context = {
+            'posts': posts
+        }
+        return render(request, 'administration_display_all_posts_to_delete.html', context)
+
+
+class DeleteSpecificPostView(LoginRequiredMixin, View):
+    """Endpoint to delete specific post"""
+
+    def post(self, request, *args, **kwargs):
+        post = get_post_with_pk(kwargs.get('pk'))
+        post.delete()
+        return HttpResponseRedirect('/администрирование/')
