@@ -207,15 +207,21 @@
     <section class="ftco-section ftco-no-pt ftco-no-pb">
         <div class="container-fluid px-md-0">
             <div class="row no-gutters">
-
                 {% for post in posts %}
                     <div class="col-md-4 ftco-animate">
                         <div class="work img d-flex align-items-end"
                              style="background-image: url({{ post.image.url }});">
+
                             <a href="{{ post.image.url }}"
                                class="icon image-popup d-flex justify-content-center align-items-center">
                                 <span class="icon-expand"></span>
                             </a>
+                            <button type="button" class="btn btn-primary ml-2" style="z-index: 1" data-toggle="modal"
+                                    data-target="#exampleModal-{{ post.pk }}">
+                                <span class="icon-info"></span>
+                            </button>
+
+
                             <div class="desc w-100 px-4">
                                 <div class="text w-100 mb-3">
                                     <span>{{ post.title }}</span>
@@ -224,12 +230,44 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="modal fade"
+                         id="exampleModal-{{ post.pk }}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" style="z-index: 1;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Дополнительная информация</h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                   <div class="row">
+                                       <div class="col-4"><img class="img-fluid" src="{{ post.image.url }}" alt=""></div>
+                                       <div class="col-8">{{ post.content }}</div>
+                                   </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Закрыть
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 {% endfor %}
 
             </div>
         </div>
     </section>
+
 {% endblock %}
+
+
+
 
 <footer class="footer">
     <div class="container-fluid px-lg-5">

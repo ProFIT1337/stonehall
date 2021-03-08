@@ -10,6 +10,7 @@ class Post(models.Model):
     is_on_main_page = models.BooleanField(default=False, verbose_name='Должен ли пост отображаться на главной?')
     short_description = models.CharField(max_length=100, verbose_name='Короткое описание для отображения в некоторых '
                                                                       'местах')
+    content = models.TextField(verbose_name='Полное описание работы')
 
     def __str__(self):
         return f'Пост {self.title}'
