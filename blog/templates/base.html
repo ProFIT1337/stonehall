@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
-          rel="stylesheet">
+    rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -22,8 +22,10 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
     {% block extra_link %}
-    
+
     {% endblock %}
 </head>
 <body>
@@ -247,10 +249,11 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                   <div class="row">
-                                       <div class="col-4"><img class="img-fluid" src="{{ post.image.url }}" alt=""></div>
-                                       <div class="col-8">{{ post.get_content_as_markdown }}</div>
-                                   </div>
+                                    <div class="row">
+                                        <div class="col-4"><img class="img-fluid" src="{{ post.image.url }}" alt="">
+                                        </div>
+                                        <div class="col-8">{{ post.get_content_as_markdown }}</div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
