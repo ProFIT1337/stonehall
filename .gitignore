@@ -4,3 +4,5 @@ setenv.sh
 /venv
 /.idea
 /media
+/config
+/logs
