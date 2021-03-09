@@ -24,4 +24,4 @@ class Post(models.Model):
         return reverse('post_detail', kwargs={'pk': self.pk})
 
     def get_content_as_markdown(self):
-        return mark_safe(markdown(self.content, safe_mode='escape'))
+        return mark_safe(markdown(self.content))
