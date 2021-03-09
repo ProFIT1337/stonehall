@@ -7,7 +7,7 @@ from django.views.generic import View
 from administration.forms import PostForm, PostWithoutImageForm
 from administration.services import save_post_to_db, add_feedback_qty_badge_to_context
 from blog.services import get_all_posts, get_post_with_pk
-from question.services import get_all_questions, get_question_with_pk, get_qty_unanswered_feedback
+from question.services import get_all_questions, get_question_with_pk
 
 
 class AdministrationBaseView(LoginRequiredMixin, View):

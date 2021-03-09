@@ -7,10 +7,11 @@ def get_all_questions():
     return questions
 
 
-def get_question_with_pk(pk:int):
+def get_question_with_pk(pk: int):
     """Returns question with pk"""
     question = Question.objects.get(pk=pk)
     return question
+
 
 def get_qty_unanswered_feedback() -> int:
     """Returns the number of questions with an argument 'is_answered'==False"""
