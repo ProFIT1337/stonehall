@@ -37,7 +37,10 @@
                        class="list-group-item list-group-item-action {% if request.path == '/администрирование/удалить-пост/' %}active{% endif %}">Удалить
                         пост</a>
                     <a href="{% url 'administration_feedback' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Фидбек</a>
+                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Фидбек
+                        {% if unanswered_feedback_qty %}
+                            <span class="badge rounded-pill bg-warning">{{ unanswered_feedback_qty }}</span>
+                        {% endif %} </a>
                     <a href="{% url 'logout' %}" class="list-group-item list-group-item-action">Выйти из аккаунта</a>
                 </div>
             </div>

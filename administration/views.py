@@ -5,16 +5,18 @@ from django.shortcuts import render
 from django.views.generic import View
 
 from administration.forms import PostForm, PostWithoutImageForm
-from administration.services import save_post_to_db
+from administration.services import save_post_to_db, add_feedback_qty_badge_to_context
 from blog.services import get_all_posts, get_post_with_pk
-from question.services import get_all_questions, get_question_with_pk
+from question.services import get_all_questions, get_question_with_pk, get_qty_unanswered_feedback
 
 
 class AdministrationBaseView(LoginRequiredMixin, View):
     """Base view for administration page"""
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'administration_base.html', {})
+        context = {}
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_base.html', context)
 
 
 class NewPostView(LoginRequiredMixin, View):
@@ -23,11 +25,13 @@ class NewPostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None, request.FILES or None)
         context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_new_post.html', context)
 
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST or None, request.FILES or None)
         context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Пост создан')
@@ -43,6 +47,7 @@ class FeedbackView(LoginRequiredMixin, View):
         context = {
             'questions': questions
         }
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_feedback.html', context)
 
 
@@ -67,6 +72,7 @@ class EditPostView(LoginRequiredMixin, View):
         context = {
             'posts': posts
         }
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_display_all_posts_to_edit.html', context)
 
 
@@ -80,6 +86,7 @@ class EditSpecificPostView(LoginRequiredMixin, View):
             'form': form,
             'post': post
         }
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_edit_specific_post.html', context)
 
     def post(self, request, *args, **kwargs):
@@ -101,6 +108,7 @@ class EditSpecificPostView(LoginRequiredMixin, View):
             'form': form_with_image,
             'post': post
         }
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_edit_specific_post.html', context)
 
 
@@ -112,6 +120,7 @@ class DeletePostView(LoginRequiredMixin, View):
         context = {
             'posts': posts
         }
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_display_all_posts_to_delete.html', context)
 
 
