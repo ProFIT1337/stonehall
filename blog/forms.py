@@ -10,7 +10,9 @@ class LoginForm(forms.ModelForm):
         """Rename login form fields"""
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Логин'
+        self.fields['username'].help_text = ''
         self.fields['password'].label = 'Пароль'
+        self.fields['password'].help_text = ''
 
     def clean(self):
         """Username and password validation"""
