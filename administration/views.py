@@ -64,6 +64,17 @@ class FeedbackAnsweredView(LoginRequiredMixin, View):
         return HttpResponseRedirect('/администрирование/фидбек')
 
 
+class FeedbackDeleteView(LoginRequiredMixin, View):
+    """Endpoint for administration feedback form. Delete feedback"""
+
+    def post(self, request, *args, **kwargs):
+        question_pk = kwargs.get('pk')
+        question = get_question_with_pk(question_pk)
+        question.delete()
+        messages.add_message(request, messages.SUCCESS, 'Фидбек удалён')
+        return HttpResponseRedirect('/администрирование/фидбек')
+
+
 class EditPostView(LoginRequiredMixin, View):
     """Display all posts. The user can choose which post to change"""
 

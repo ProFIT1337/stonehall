@@ -9,7 +9,8 @@ from administration.views import \
     EditPostView, \
     EditSpecificPostView, \
     DeletePostView, \
-    DeleteSpecificPostView
+    DeleteSpecificPostView, \
+    FeedbackDeleteView
 
 urlpatterns = [
     path('', AdministrationBaseView.as_view(), name='administration_base'),
@@ -22,4 +23,5 @@ urlpatterns = [
          name='administration_delete_specific_post'),
     path('фидбек/', FeedbackView.as_view(), name='administration_feedback'),
     path('фидбек-отвечено/<int:pk>/', FeedbackAnsweredView.as_view(), name='administration_feedback_answered'),
+    path('фидбек-удалить/<int:pk>/', FeedbackDeleteView.as_view(), name='administration_feedback_delete'),
 ]

@@ -32,6 +32,12 @@
                             <input type="submit" class="btn btn-primary" value="Сохранить">
                         </form>
                     </td>
+                    <td>
+                        <form action="{% url 'administration_feedback_delete' pk=question.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Удалить">
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
