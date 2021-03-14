@@ -30,11 +30,12 @@
 </head>
 <body>
 <div class="container pt-5">
-    <div class="row justify-content-between">
-        <div class="col">
-            <a class="navbar-brand" href="{% url 'base' %}">Камень<span>холл</span></a>
-        </div>
-        <div class="col d-flex justify-content-end">
+    <div class="row justify-content-center">
+        <div class="col" style="margin-top: -40px; margin-bottom: 10px;">
+            <a class="" href="{% url 'base' %}"><img class="img-fluid w-25" src="{% static 'images/logo image.png' %}"
+                                                     alt=""></a>
+            <a class="" href="{% url 'base' %}"><img class="img-fluid w-25" src="{% static 'images/logo text.png' %}"
+                                                     alt=""></a>
         </div>
     </div>
 </div>
@@ -91,7 +92,7 @@
                 <div class="container">
                     <div class="row no-gutters slider-text align-items-center justify-content-center">
                         <div class="col-md-12 ftco-animate">
-                            <div class="text w-100 text-center" >
+                            <div class="text w-100 text-center">
                                 <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">Мы сделаем это</h2>
                                 <h1 class="mb-3">Быстро и качественно</h1>
                             </div>
@@ -250,7 +251,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col-4"><img class="img-fluid" src="{{ post.image.url }}" alt="">
+                                        <div class="col-4">
+                                            <img class="img-fluid" src="{{ post.image.url }}" alt="">
+                                            {% for image in post.postimage_set.all %}
+                                                <img src="{{ image.image.url }}" class="img-fluid"
+                                                     alt="{{ image.description }}">
+                                            {% endfor %}
+
                                         </div>
                                         <div class="col-8">{{ post.get_content_as_markdown }}</div>
                                     </div>
@@ -300,9 +307,12 @@
                                     <div class="col-md-6 mb-md-0 mb-4">
                                         <h2 class="footer-heading">Свяжитесь с нами</h2>
                                         <ul class="list-unstyled">
-                                            <li class="py-1 d-block"><span class="fa fa-phone"></span>+7 923 366 12 51</li>
-                                            <li class="py-1 d-block"><span class="fa fa-paper-plane"></span> <a href="mailto:info@yoursite.com">admin@каменьхолл.рф</a></li>
-                                            <li class="py-1 d-block"><span class="fa fa-globe"></span><a href="{% url 'contact' %}"> Форма обратной связи</a></li>
+                                            <li class="py-1 d-block"><span class="fa fa-phone"></span>+7 923 366 12 51
+                                            </li>
+                                            <li class="py-1 d-block"><span class="fa fa-paper-plane"></span> <a
+                                                    href="mailto:info@yoursite.com">admin@каменьхолл.рф</a></li>
+                                            <li class="py-1 d-block"><span class="fa fa-globe"></span><a
+                                                    href="{% url 'contact' %}"> Форма обратной связи</a></li>
                                         </ul>
                                     </div>
                                 </div>

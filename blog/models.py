@@ -25,3 +25,13 @@ class Post(models.Model):
 
     def get_content_as_markdown(self):
         return mark_safe(markdown(self.content))
+
+class PostImage(models.Model):
+    """Images for Post model"""
+    description = models.TextField(blank=True, null=True, verbose_name="Описание")
+    image = models.ImageField(verbose_name="Изображение")
+    post = models.ForeignKey(Post, verbose_name="Пост, к которому принадлежат изображения", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.description
+

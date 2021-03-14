@@ -1,4 +1,4 @@
-# from django.contrib import admin #comment in production
+from django.contrib import admin #comment in production
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
@@ -6,7 +6,7 @@ from django.urls import path, include
 from . import settings
 
 urlpatterns = [
-    # path('admin/', admin.site.urls), #comment in production
+    path('admin/', admin.site.urls), #comment in production
     path('', include('blog.urls')),
 ]
 
