@@ -242,7 +242,7 @@
                          id="exampleModal-{{ post.pk }}" tabindex="-1"
                          aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" style="z-index: 1;">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" style="z-index: 1;">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Дополнительная информация</h5>
@@ -250,17 +250,20 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <img class="img-fluid" src="{{ post.image.url }}" alt="">
-                                            {% for image in post.postimage_set.all %}
-                                                <img src="{{ image.image.url }}" class="img-fluid"
-                                                     alt="{{ image.description }}">
-                                            {% endfor %}
-
-                                        </div>
-                                        <div class="col-8">{{ post.get_content_as_markdown }}</div>
+                                    <div class="row justify-content-center">
+                                        <img class="img-fluid" src="{{ post.image.url }}" alt="">
                                     </div>
+
+                                    {% for image in post.postimage_set.all %}
+                                        <div class="row justify-content-center mt-3">
+                                            <img src="{{ image.image.url }}" class="img-fluid"
+                                                 alt="{{ image.description }}">
+                                        </div>
+                                    {% endfor %}
+
+
+                                    <div class="row justify-content-center mt-3">{{ post.get_content_as_markdown }}</div>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
