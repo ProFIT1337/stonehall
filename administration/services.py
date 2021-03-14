@@ -18,3 +18,11 @@ def add_feedback_qty_badge_to_context(context):
     new_context = context.copy()
     new_context['unanswered_feedback_qty'] = unanswered_feedback_qty
     return new_context
+
+
+def save_image_to_db(image, form):
+    """Save changed image to db, with or without changed image"""
+    image.post = form.cleaned_data['post']
+    if 'image' in form.cleaned_data:
+        image.image = form.cleaned_data['image']
+    image.save()

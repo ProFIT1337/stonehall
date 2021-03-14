@@ -4,9 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
 
-from administration.forms import PostForm, PostWithoutImageForm
-from administration.services import save_post_to_db, add_feedback_qty_badge_to_context
-from blog.services import get_all_posts, get_post_with_pk
+from administration.forms import PostForm, PostWithoutImageForm, ImageForm, ImageWithoutImageForm
+from administration.services import save_post_to_db, add_feedback_qty_badge_to_context, save_image_to_db
+from blog.services import get_all_posts, get_post_with_pk, get_all_images, get_image_with_pk
 from question.services import get_all_questions, get_question_with_pk
 
 
@@ -142,3 +142,61 @@ class DeleteSpecificPostView(LoginRequiredMixin, View):
         post = get_post_with_pk(kwargs.get('pk'))
         post.delete()
         return HttpResponseRedirect('/администрирование/')
+
+
+class ImagesListView(LoginRequiredMixin, View):
+    """View with all images list"""
+
+    def get(self, request, *args, **kwargs):
+        images = get_all_images()
+        context = {
+            'images': images
+        }
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_display_all_images.html', context)
+
+
+class ImageDelete(LoginRequiredMixin, View):
+    """Endpoint to delete specific image"""
+
+    def post(self, request, *args, **kwargs):
+        image = get_image_with_pk(kwargs.get('pk'))
+        image.delete()
+        messages.add_message(request, messages.SUCCESS, 'Изображение успешно удалено')
+        return HttpResponseRedirect('/администрирование/')
+
+
+class ImageEdit(LoginRequiredMixin, View):
+    """Changing a specific image on the administration page"""
+
+    def get(self, request, *args, **kwargs):
+        image = get_image_with_pk(kwargs.get('pk'))
+        form = ImageForm(instance=image)
+        context = {
+            'form': form,
+            'image': image
+        }
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_edit_specific_image.html', context)
+
+    def post(self, request, *args, **kwargs):
+        image = get_image_with_pk(kwargs.get('pk'))
+        form_with_image = ImageForm(request.POST or None, request.FILES or None)
+        form_without_image = ImageWithoutImageForm(request.POST)
+
+        if form_with_image.is_valid():
+            save_image_to_db(image, form_with_image)
+            messages.add_message(request, messages.SUCCESS, 'Фотография успешно сохранена')
+            return HttpResponseRedirect('/администрирование/')
+
+        if form_without_image.is_valid():
+            save_image_to_db(image, form_without_image)
+            messages.add_message(request, messages.SUCCESS, 'Фотография успешно измена')
+            return HttpResponseRedirect('/администрирование/')
+
+        context = {
+            'form': form_with_image,
+            'image': image
+        }
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_edit_specific_image.html', context)
