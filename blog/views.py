@@ -8,6 +8,7 @@ from blog.forms import LoginForm
 from blog.models import Post
 from blog.services import get_posts_for_main_page
 from question.forms import QuestionForm
+from stonehall.services import send_notification_about_feedback
 
 
 class BaseView(View):
@@ -50,6 +51,7 @@ class ContactView(View):
             new_question = bound_form.save()
             messages.add_message(request, messages.SUCCESS,
                                  'Мы получили ваше сообщение. Ожидайте, мы скоро с вами свяжемся')
+            send_notification_about_feedback(new_question)
             return HttpResponseRedirect('/контакты')
         context = {
             'form': bound_form,

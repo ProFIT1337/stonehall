@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'administration',
     'blog',
     'question',
+    'mail',
 ]
 
 MIDDLEWARE = [
@@ -106,3 +107,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.getenv('STONEHALL_EMAIL_FROM')
 EMAIL_HOST_PASSWORD = os.getenv('STONEHALL_EMAIL_FROM_PASSWORD')
 EMAIL_PORT = 587
+
+EMAIL_TO = os.getenv('STONEHALL_EMAIL_TO')
