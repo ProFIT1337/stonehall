@@ -30,12 +30,12 @@ class NewPostView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST or None, request.FILES or None)
-        context = {'form': form}
-        context = add_feedback_qty_badge_to_context(context)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Пост создан')
             return HttpResponseRedirect('/администрирование')
+        context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_new_post.html', context)
 
 
@@ -156,7 +156,7 @@ class ImagesListView(LoginRequiredMixin, View):
         return render(request, 'administration_display_all_images.html', context)
 
 
-class ImageDelete(LoginRequiredMixin, View):
+class ImageDeleteView(LoginRequiredMixin, View):
     """Endpoint to delete specific image"""
 
     def post(self, request, *args, **kwargs):
@@ -166,7 +166,7 @@ class ImageDelete(LoginRequiredMixin, View):
         return HttpResponseRedirect('/администрирование/')
 
 
-class ImageEdit(LoginRequiredMixin, View):
+class ImageEditView(LoginRequiredMixin, View):
     """Changing a specific image on the administration page"""
 
     def get(self, request, *args, **kwargs):
@@ -200,3 +200,23 @@ class ImageEdit(LoginRequiredMixin, View):
         }
         context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_edit_specific_image.html', context)
+
+
+class NewImageView(LoginRequiredMixin, View):
+    """Administration view with adding new image"""
+
+    def get(self, request, *args, **kwargs):
+        form = ImageForm(request.POST or None, request.FILES or None)
+        context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_new_image.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = ImageForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Фотография добавлена')
+            return HttpResponseRedirect('/администрирование/')
+        context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_new_image.html', context)

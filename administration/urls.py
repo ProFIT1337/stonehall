@@ -12,7 +12,9 @@ from administration.views import \
     DeleteSpecificPostView, \
     FeedbackDeleteView, \
     ImagesListView, \
-    ImageDelete, ImageEdit
+    ImageDeleteView, \
+    ImageEditView, \
+    NewImageView
 
 urlpatterns = [
     path('', AdministrationBaseView.as_view(), name='administration_base'),
@@ -24,8 +26,9 @@ urlpatterns = [
     path('удалить-конкретный-пост/<int:pk>/', DeleteSpecificPostView.as_view(),
          name='administration_delete_specific_post'),
     path('список-фотографий/', ImagesListView.as_view(), name='administration_images_list'),
-    path('удалить-фотографию/<int:pk>/', ImageDelete.as_view(), name='administration_delete_image'),
-    path('изменить-фотографию/<int:pk>/', ImageEdit.as_view(), name='administration_edit_image'),
+    path('добавить-фотографию/', NewImageView.as_view(), name='administration_add_image'),
+    path('удалить-фотографию/<int:pk>/', ImageDeleteView.as_view(), name='administration_delete_image'),
+    path('изменить-фотографию/<int:pk>/', ImageEditView.as_view(), name='administration_edit_image'),
     path('фидбек/', FeedbackView.as_view(), name='administration_feedback'),
     path('фидбек-отвечено/<int:pk>/', FeedbackAnsweredView.as_view(), name='administration_feedback_answered'),
     path('фидбек-удалить/<int:pk>/', FeedbackDeleteView.as_view(), name='administration_feedback_delete'),
