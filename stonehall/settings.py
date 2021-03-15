@@ -99,3 +99,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'login'
+
+# mail
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.getenv('STONEHALL_EMAIL_FROM')
+EMAIL_HOST_PASSWORD = os.getenv('STONEHALL_EMAIL_FROM_PASSWORD')
+EMAIL_PORT = 587
