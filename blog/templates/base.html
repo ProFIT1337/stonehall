@@ -40,35 +40,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="fa fa-bars"></span> Меню
-        </button>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item {% if request.path == '/' %}active{% endif %}"><a href="{% url 'base' %}"
-                                                                                      class="nav-link">Главная</a></li>
-                <li class="nav-item {% if request.path == '/о-нас/' %}active{% endif %}"><a href="{% url 'about' %}"
-                                                                                            class="nav-link">О нас</a>
-                </li>
-                <li class="nav-item {% if request.path == '/проекты/' %}active{% endif %}"><a
-                        href="{% url 'projects' %}" class="nav-link">Проекты</a>
-                </li>
-                <li class="nav-item {% if request.path == '/контакты/' %}active{% endif %}"><a
-                        href="{% url 'contact' %}" class="nav-link">Контакты</a>
-                </li>
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item {% if '/администрирование/' in request.path %}active{% endif %}"><a
-                            href="/администрирование/" class="nav-link">Администрирование</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- END nav -->
+{% include 'include/_navbar.html' %}
 
 {% block content %}
     <div class="hero-wrap">
@@ -189,7 +161,7 @@
                             <span class="flaticon-engineer-1"></span>
                         </div>
                         <div class="text">
-                            <h3>Высокое какчество работы</h3>
+                            <h3>Высокое качество работы</h3>
                             <p class="mb-0">Мы гарнтируем качественную работу</p>
                         </div>
                     </div>
@@ -214,147 +186,15 @@
         <div class="container-fluid px-md-0">
             <div class="row no-gutters">
                 {% for post in posts %}
-                    <div class="col-md-4 ftco-animate">
-                        <div class="work img d-flex align-items-end"
-                             style="background-image: url({{ post.image.url }});">
-
-                            <a href="{{ post.image.url }}"
-                               class="icon image-popup d-flex justify-content-center align-items-center">
-                                <span class="icon-expand"></span>
-                            </a>
-                            <button type="button" class="btn btn-primary ml-2" style="z-index: 1" data-toggle="modal"
-                                    data-target="#exampleModal-{{ post.pk }}">
-                                <span class="icon-info"></span>
-                            </button>
-
-
-                            <div class="desc w-100 px-4">
-                                <div class="text w-100 mb-3">
-                                    <span>{{ post.title }}</span>
-                                    <h2><a href="work-single.html">{{ post.short_description }}</a></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="modal fade"
-                         id="exampleModal-{{ post.pk }}" tabindex="-1"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-centered" style="z-index: 1;">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Дополнительная информация</h5>
-                                    <button type="button" class="btn-close" data-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row justify-content-center">
-                                        <img class="img-fluid" src="{{ post.image.url }}" alt="">
-                                    </div>
-
-                                    {% for image in post.postimage_set.all %}
-                                        <div class="row justify-content-center mt-3">
-                                            <img src="{{ image.image.url }}" class="img-fluid">
-                                        </div>
-                                    {% endfor %}
-                                    <br>
-
-                                    <div class="row justify-content-center mt-3">{{ post.get_content_as_markdown }}</div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                        Закрыть
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    {% include 'include/_card.html' %}
                 {% endfor %}
-
             </div>
         </div>
     </section>
 
 {% endblock %}
 
-
-
-
-<footer class="footer">
-    <div class="container-fluid px-lg-5">
-        <div class="row">
-            <div class="col-md-9 py-5">
-                <div class="row">
-                    <div class="col-md-4 mb-md-0 mb-4">
-                        <h2 class="footer-heading">О нас</h2>
-                        <p>Lorem ipsum dolor sit.</p>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 col-lg-10">
-                                <div class="row">
-                                    <div class="col-md-6 mb-md-0 mb-4">
-                                        <h2 class="footer-heading">Посмотрите</h2>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{% url 'projects' %}" class="py-1 d-block">Наши проекты</a>
-                                            </li>
-                                            <li><a href="{% url 'about' %}" class="py-1 d-block">О нас</a></li>
-                                            <li><a href="{% url 'contact' %}" class="py-1 d-block">Контакты</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6 mb-md-0 mb-4">
-                                        <h2 class="footer-heading">Свяжитесь с нами</h2>
-                                        <ul class="list-unstyled">
-                                            <li class="py-1 d-block"><span class="fa fa-phone"></span>+7 923 366 12 51
-                                            </li>
-                                            <li class="py-1 d-block"><span class="fa fa-paper-plane"></span> <a
-                                                    href="mailto:info@yoursite.com">admin@каменьхолл.рф</a></li>
-                                            <li class="py-1 d-block"><span class="fa fa-globe"></span><a
-                                                    href="{% url 'contact' %}"> Форма обратной связи</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
-
-                {% block feedback %}
-                    <h2 class="footer-heading">Задайте вопрос</h2>
-                    <form action="{% url 'contact' %}" class="contact-form" method="post">
-                        {% csrf_token %}
-
-                        {% for field in form %}
-                            <div class="form-group">
-
-                                {% if field.errors %}
-                                    <div class="alert alert-danger">
-                                        {{ field.errors }}
-                                    </div>
-                                {% endif %}
-
-                                {{ field }}
-
-                            </div>
-                        {% endfor %}
-
-                        <div class="form-group">
-                            <button type="submit" class="form-control submit px-3">Отправить</button>
-                        </div>
-                    </form>
-                {% endblock %}
-
-            </div>
-        </div>
-    </div>
-</footer>
-
+{% include 'include/_footer.html' %}
 
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">

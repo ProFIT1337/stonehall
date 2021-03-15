@@ -1,7 +1,9 @@
-from question.services import get_qty_unanswered_feedback
+from django.contrib import messages
+
+from question.services import get_qty_unanswered_feedback, get_question_with_pk
 
 
-def save_post_to_db(post, form):
+def save_post_to_db(request, post, form):
     """Save changed post to db, with or without image"""
     post.title = form.cleaned_data['title']
     post.short_description = form.cleaned_data['short_description']
@@ -10,6 +12,7 @@ def save_post_to_db(post, form):
     if 'image' in form.cleaned_data:
         post.image = form.cleaned_data['image']
     post.save()
+    messages.add_message(request, messages.SUCCESS, 'Пост успешно изменён')
 
 
 def add_feedback_qty_badge_to_context(context):
@@ -20,9 +23,18 @@ def add_feedback_qty_badge_to_context(context):
     return new_context
 
 
-def save_image_to_db(image, form):
+def save_image_to_db(request, image, form):
     """Save changed image to db, with or without changed image"""
     image.post = form.cleaned_data['post']
     if 'image' in form.cleaned_data:
         image.image = form.cleaned_data['image']
     image.save()
+    messages.add_message(request, messages.SUCCESS, 'Фотография успешно сохранена')
+
+def save_question_is_answered_field_to_db(request, question_pk, is_answered):
+    """Save question to db, when is_answered field was changed"""
+    question = get_question_with_pk(question_pk)
+    question.is_answered = is_answered
+    question.save()
+    messages.add_message(request, messages.SUCCESS, 'Изменение сохранено')
+

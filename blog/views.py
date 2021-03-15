@@ -1,14 +1,11 @@
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, ListView
 
 from blog.forms import LoginForm
 from blog.models import Post
-from blog.services import get_posts_for_main_page
+from blog.services import get_posts_for_main_page, save_question_to_db, login_user_to_site
 from question.forms import QuestionForm
-from stonehall.services import send_notification_about_feedback
 
 
 class BaseView(View):
@@ -48,10 +45,7 @@ class ContactView(View):
     def post(self, request, *args, **kwargs):
         bound_form = QuestionForm(request.POST)
         if bound_form.is_valid():
-            new_question = bound_form.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Мы получили ваше сообщение. Ожидайте, мы скоро с вами свяжемся')
-            send_notification_about_feedback(new_question)
+            save_question_to_db(request, bound_form)
             return HttpResponseRedirect('/контакты')
         context = {
             'form': bound_form,
@@ -87,10 +81,6 @@ class LoginView(View):
         """When login page is called by method POST"""
         form = LoginForm(request.POST or None)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user:
-                login(request, user)
+            if login_user_to_site(request, form):
                 return HttpResponseRedirect('/')
         return render(request, 'login.html', {'form': form})

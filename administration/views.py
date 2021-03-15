@@ -4,8 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
 
-from administration.forms import PostForm, PostWithoutImageForm, ImageForm, ImageWithoutImageForm
-from administration.services import save_post_to_db, add_feedback_qty_badge_to_context, save_image_to_db
+from blog.forms import PostForm, PostWithoutImageForm, ImageForm, ImageWithoutImageForm
+from administration.services import save_post_to_db, add_feedback_qty_badge_to_context, save_image_to_db, \
+    save_question_is_answered_field_to_db
 from blog.services import get_all_posts, get_post_with_pk, get_all_images, get_image_with_pk
 from question.services import get_all_questions, get_question_with_pk
 
@@ -56,11 +57,8 @@ class FeedbackAnsweredView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         question_pk = kwargs.get('pk')
-        question = get_question_with_pk(question_pk)
         is_answered = bool(request.POST.get('is_answered'))
-        question.is_answered = is_answered
-        question.save()
-        messages.add_message(request, messages.SUCCESS, 'Изменение сохранено')
+        save_question_is_answered_field_to_db(request, question_pk, is_answered)
         return HttpResponseRedirect('/администрирование/фидбек')
 
 
@@ -106,13 +104,11 @@ class EditSpecificPostView(LoginRequiredMixin, View):
         form_without_image = PostWithoutImageForm(request.POST)
 
         if form_with_image.is_valid():
-            save_post_to_db(post, form_with_image)
-            messages.add_message(request, messages.SUCCESS, 'Пост успешно изменён')
+            save_post_to_db(request, post, form_with_image)
             return HttpResponseRedirect('/администрирование/')
 
         if form_without_image.is_valid():
-            save_post_to_db(post, form_with_image)
-            messages.add_message(request, messages.SUCCESS, 'Пост успешно изменён')
+            save_post_to_db(request, post, form_with_image)
             return HttpResponseRedirect('/администрирование/')
 
         context = {
@@ -156,14 +152,24 @@ class ImagesListView(LoginRequiredMixin, View):
         return render(request, 'administration_display_all_images.html', context)
 
 
-class ImageDeleteView(LoginRequiredMixin, View):
-    """Endpoint to delete specific image"""
+class NewImageView(LoginRequiredMixin, View):
+    """Administration view with adding new image"""
+
+    def get(self, request, *args, **kwargs):
+        form = ImageForm(request.POST or None, request.FILES or None)
+        context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_new_image.html', context)
 
     def post(self, request, *args, **kwargs):
-        image = get_image_with_pk(kwargs.get('pk'))
-        image.delete()
-        messages.add_message(request, messages.SUCCESS, 'Изображение успешно удалено')
-        return HttpResponseRedirect('/администрирование/')
+        form = ImageForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Фотография добавлена')
+            return HttpResponseRedirect('/администрирование/')
+        context = {'form': form}
+        context = add_feedback_qty_badge_to_context(context)
+        return render(request, 'administration_new_image.html', context)
 
 
 class ImageEditView(LoginRequiredMixin, View):
@@ -185,13 +191,10 @@ class ImageEditView(LoginRequiredMixin, View):
         form_without_image = ImageWithoutImageForm(request.POST)
 
         if form_with_image.is_valid():
-            save_image_to_db(image, form_with_image)
-            messages.add_message(request, messages.SUCCESS, 'Фотография успешно сохранена')
+            save_image_to_db(request, image, form_with_image)
             return HttpResponseRedirect('/администрирование/')
-
         if form_without_image.is_valid():
-            save_image_to_db(image, form_without_image)
-            messages.add_message(request, messages.SUCCESS, 'Фотография успешно измена')
+            save_image_to_db(request, image, form_without_image)
             return HttpResponseRedirect('/администрирование/')
 
         context = {
@@ -202,21 +205,11 @@ class ImageEditView(LoginRequiredMixin, View):
         return render(request, 'administration_edit_specific_image.html', context)
 
 
-class NewImageView(LoginRequiredMixin, View):
-    """Administration view with adding new image"""
-
-    def get(self, request, *args, **kwargs):
-        form = ImageForm(request.POST or None, request.FILES or None)
-        context = {'form': form}
-        context = add_feedback_qty_badge_to_context(context)
-        return render(request, 'administration_new_image.html', context)
+class ImageDeleteView(LoginRequiredMixin, View):
+    """Endpoint to delete specific image"""
 
     def post(self, request, *args, **kwargs):
-        form = ImageForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS, 'Фотография добавлена')
-            return HttpResponseRedirect('/администрирование/')
-        context = {'form': form}
-        context = add_feedback_qty_badge_to_context(context)
-        return render(request, 'administration_new_image.html', context)
+        image = get_image_with_pk(kwargs.get('pk'))
+        image.delete()
+        messages.add_message(request, messages.SUCCESS, 'Изображение успешно удалено')
+        return HttpResponseRedirect('/администрирование/')

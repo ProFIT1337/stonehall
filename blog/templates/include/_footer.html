@@ -1,0 +1,70 @@
+<footer class="footer">
+    <div class="container-fluid px-lg-5">
+        <div class="row">
+            <div class="col-md-9 py-5">
+                <div class="row">
+                    <div class="col-md-4 mb-md-0 mb-4">
+                        <h2 class="footer-heading">О нас</h2>
+                        <p>Lorem ipsum dolor sit.</p>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 col-lg-10">
+                                <div class="row">
+                                    <div class="col-md-6 mb-md-0 mb-4">
+                                        <h2 class="footer-heading">Посмотрите</h2>
+                                        <ul class="list-unstyled">
+                                            <li><a href="{% url 'projects' %}" class="py-1 d-block">Наши проекты</a>
+                                            </li>
+                                            <li><a href="{% url 'about' %}" class="py-1 d-block">О нас</a></li>
+                                            <li><a href="{% url 'contact' %}" class="py-1 d-block">Контакты</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 mb-md-0 mb-4">
+                                        <h2 class="footer-heading">Свяжитесь с нами</h2>
+                                        <ul class="list-unstyled">
+                                            <li class="py-1 d-block"><span class="fa fa-phone"></span>+7 923 366 12 51
+                                            </li>
+                                            <li class="py-1 d-block"><span class="fa fa-paper-plane"></span> <a
+                                                    href="mailto:info@yoursite.com">admin@каменьхолл.рф</a></li>
+                                            <li class="py-1 d-block"><span class="fa fa-globe"></span><a
+                                                    href="{% url 'contact' %}"> Форма обратной связи</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
+
+                {% block feedback %}
+                    <h2 class="footer-heading">Задайте вопрос</h2>
+                    <form action="{% url 'contact' %}" class="contact-form" method="post">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                            <div class="form-group">
+
+                                {% if field.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+
+                                {{ field }}
+
+                            </div>
+                        {% endfor %}
+
+                        <div class="form-group">
+                            <button type="submit" class="form-control submit px-3">Отправить</button>
+                        </div>
+                    </form>
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+</footer>

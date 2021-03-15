@@ -26,6 +26,7 @@ class Post(models.Model):
     def get_content_as_markdown(self):
         return mark_safe(markdown(self.content))
 
+
 class PostImage(models.Model):
     """Images for Post model"""
     image = models.ImageField(verbose_name="Изображение")
@@ -36,4 +37,3 @@ class PostImage(models.Model):
 
     def get_absolute_url(self):
         return reverse('image_detail', kwargs={'pk': self.pk})
-
