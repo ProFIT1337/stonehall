@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
@@ -213,3 +214,10 @@ class ImageDeleteView(LoginRequiredMixin, View):
         image.delete()
         messages.add_message(request, messages.SUCCESS, 'Изображение успешно удалено')
         return HttpResponseRedirect('/администрирование/')
+
+
+def clear_cache(request):
+    """Clears the cache to update data from the database"""
+    cache.clear()
+    messages.add_message(request, messages.SUCCESS, 'Данные успешно обновлены из базы')
+    return HttpResponseRedirect('/администрирование/')

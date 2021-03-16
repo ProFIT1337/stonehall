@@ -6,3 +6,4 @@ setenv.sh
 /media
 /config
 /logs
+/django_cache

@@ -14,11 +14,13 @@ from administration.views import \
     ImagesListView, \
     ImageDeleteView, \
     ImageEditView, \
-    NewImageView
+    NewImageView, \
+    clear_cache
 
 urlpatterns = [
     path('', AdministrationBaseView.as_view(), name='administration_base'),
     path('выйти/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('удалить-кэш/', clear_cache, name='delete_cache'),
     path('новый-пост/', NewPostView.as_view(), name='administration_new_post'),
     path('изменить-пост/', EditPostView.as_view(), name='administration_edit_post'),
     path('изменить-конкретный-пост/<int:pk>/', EditSpecificPostView.as_view(), name='administration_edit_specific_post'),
