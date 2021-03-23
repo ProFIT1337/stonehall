@@ -1,5 +1,7 @@
 db.sqlite3
 setenv.sh
+settings_prod.py
+
 **/__pycache__/
 /venv
 /.idea

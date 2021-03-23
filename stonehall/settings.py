@@ -3,11 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('STONEHALL_SECRET_KEY')
-
 DEBUG = True
-
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -60,16 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'stonehall.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('STONEHALL_DB_NAME'),
-        'USER': os.getenv('STONEHALL_DB_USER'),
-        'PASSWORD': os.getenv('STONEHALL_DB_PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': 5432
-    }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -104,19 +90,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'login'
 
-# mail
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv('STONEHALL_EMAIL_FROM')
-EMAIL_HOST_PASSWORD = os.getenv('STONEHALL_EMAIL_FROM_PASSWORD')
-EMAIL_PORT = 587
-
-EMAIL_TO = os.getenv('STONEHALL_EMAIL_TO')
-
 INTERNAL_IPS = [
-    # ...
     '127.0.0.1',
-    # ...
 ]
 
 CACHES = {
