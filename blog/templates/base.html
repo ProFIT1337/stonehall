@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,160 +42,165 @@
 </div>
 
 {% include 'include/_navbar.html' %}
-
 {% block content %}
-    <div class="hero-wrap">
-        <div class="home-slider owl-carousel">
-            <div class="slider-item" style="background-image:url({% static 'images/background_1.jpg' %});">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-12 ftco-animate">
-                            <div class="text w-100 text-center">
-                                <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">Мы поможем тебе</h2>
-                                <h1 class="mb-3">Сделать ремонт</h1>
+    {% cache 86400 main_content %}
+
+        <div class="hero-wrap">
+            <div class="home-slider owl-carousel">
+                <div class="slider-item" style="background-image:url({% static 'images/background_1.jpg' %});">
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row no-gutters slider-text align-items-center justify-content-center">
+                            <div class="col-md-12 ftco-animate">
+                                <div class="text w-100 text-center">
+                                    <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">Мы поможем тебе</h2>
+                                    <h1 class="mb-3">Сделать ремонт</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="slider-item" style="background-image:url({% static 'images/background_2.jpg' %});">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-12 ftco-animate">
-                            <div class="text w-100 text-center">
-                                <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">Мы сделаем это</h2>
-                                <h1 class="mb-3">Быстро и качественно</h1>
+                <div class="slider-item" style="background-image:url({% static 'images/background_2.jpg' %});">
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row no-gutters slider-text align-items-center justify-content-center">
+                            <div class="col-md-12 ftco-animate">
+                                <div class="text w-100 text-center">
+                                    <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">Мы сделаем это</h2>
+                                    <h1 class="mb-3">Быстро и качественно</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="slider-item" style="background-image:url({% static 'images/background.jpg' %});">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-12 ftco-animate">
-                            <div class="text w-100 text-center">
-                                <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">В облицовке камнем у нас</h2>
-                                <h1 class="mb-3">Огромный опыт</h1>
+                <div class="slider-item" style="background-image:url({% static 'images/background.jpg' %});">
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row no-gutters slider-text align-items-center justify-content-center">
+                            <div class="col-md-12 ftco-animate">
+                                <div class="text w-100 text-center">
+                                    <h2 style="text-shadow: 1px 2px 0px black, 0 0 1em white;">В облицовке камнем у
+                                        нас</h2>
+                                    <h1 class="mb-3">Огромный опыт</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
-                    <div class="media block-6 d-block text-center pt-md-4">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="flaticon-hook"></span>
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
+                        <div class="media block-6 d-block text-center pt-md-4">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="flaticon-hook"></span>
+                            </div>
+                            <div class="media-body p-2 mt-3">
+                                <h3 class="heading">Камины и печи</h3>
+                                <p>Наш камень хорошо сдерживает тепло внутри печей и каминов.</p>
+                            </div>
                         </div>
-                        <div class="media-body p-2 mt-3">
-                            <h3 class="heading">Камины и печи</h3>
-                            <p>Наш камень хорошо сдерживает тепло внутри печей и каминов.</p>
+                    </div>
+                    <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
+                        <div class="media block-6 d-block text-center pt-md-4">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="flaticon-skyline"></span>
+                            </div>
+                            <div class="media-body p-2 mt-3">
+                                <h3 class="heading">Снаружи дома</h3>
+                                <p>Наш камень отлично переносит разные погодные условия, поэтому он идеален для
+                                    облицовки
+                                    внешних
+                                    стен дома.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
+                        <div class="media block-6 d-block text-center pt-md-4">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="flaticon-stairs"></span>
+                            </div>
+                            <div class="media-body p-2 mt-3">
+                                <h3 class="heading">Внутри дома</h3>
+                                <p>Наш камень стоек к механическим повереждениям, поэтому он идеален для облицовки
+                                    внутренних
+                                    стен, особенно в местах с домашинми животными.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
+                        <div class="media block-6 d-block text-center pt-md-4">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="flaticon-home"></span>
+                            </div>
+                            <div class="media-body p-2 mt-3">
+                                <h3 class="heading">Ванные комнаты</h3>
+                                <p>Наш камень влагостойкий, а так же удобен и неприхотлив при уборке, поэтому он идеален
+                                    для
+                                    облицовки ванных комнат .</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
-                    <div class="media block-6 d-block text-center pt-md-4">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="flaticon-skyline"></span>
-                        </div>
-                        <div class="media-body p-2 mt-3">
-                            <h3 class="heading">Снаружи дома</h3>
-                            <p>Наш камень отлично переносит разные погодные условия, поэтому он идеален для облицовки
-                                внешних
-                                стен дома.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
-                    <div class="media block-6 d-block text-center pt-md-4">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="flaticon-stairs"></span>
-                        </div>
-                        <div class="media-body p-2 mt-3">
-                            <h3 class="heading">Внутри дома</h3>
-                            <p>Наш камень стоек к механическим повереждениям, поэтому он идеален для облицовки
-                                внутренних
-                                стен, особенно в местах с домашинми животными.</p>
+
+                <div class="row no-gutters">
+                    <div class="col-md-12 col-lg-4 services-2 p-4 py-5 d-flex ftco-animate">
+                        <div class="py-3 d-flex">
+                            <div class="icon">
+                                <span class="flaticon-engineer"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Мы профессионалы</h3>
+                                <p class="mb-0">У нас огромный опыт в работе с природным камнем</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 d-flex services align-self-stretch p-4 py-md-5 ftco-animate">
-                    <div class="media block-6 d-block text-center pt-md-4">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="flaticon-home"></span>
+                    <div class="col-md-12 col-lg-4 services-2 p-4 py-5 d-flex ftco-animate">
+                        <div class="py-3 d-flex">
+                            <div class="icon">
+                                <span class="flaticon-engineer-1"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Высокое качество работы</h3>
+                                <p class="mb-0">Мы гарнтируем качественную работу</p>
+                            </div>
                         </div>
-                        <div class="media-body p-2 mt-3">
-                            <h3 class="heading">Ванные комнаты</h3>
-                            <p>Наш камень влагостойкий, а так же удобен и неприхотлив при уборке, поэтому он идеален для
-                                облицовки ванных комнат .</p>
+                    </div>
+                    <div class="col-md-12 col-lg-4 services-2 p-4 py-5 d-flex ftco-animate">
+                        <div class="py-3 d-flex">
+                            <div class="icon">
+                                <span class="flaticon-engineer-2"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Удобно связаться</h3>
+                                <p class="mb-0">Мы предлагаем множество способов связи с нами</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="row no-gutters">
-                <div class="col-md-12 col-lg-4 services-2 p-4 py-5 d-flex ftco-animate">
-                    <div class="py-3 d-flex">
-                        <div class="icon">
-                            <span class="flaticon-engineer"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Мы профессионалы</h3>
-                            <p class="mb-0">У нас огромный опыт в работе с природным камнем</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-4 services-2 p-4 py-5 d-flex ftco-animate">
-                    <div class="py-3 d-flex">
-                        <div class="icon">
-                            <span class="flaticon-engineer-1"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Высокое качество работы</h3>
-                            <p class="mb-0">Мы гарнтируем качественную работу</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-4 services-2 p-4 py-5 d-flex ftco-animate">
-                    <div class="py-3 d-flex">
-                        <div class="icon">
-                            <span class="flaticon-engineer-2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Удобно связаться</h3>
-                            <p class="mb-0">Мы предлагаем множество способов связи с нами</p>
-                        </div>
-                    </div>
+
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container-fluid px-md-0">
+                <div class="row no-gutters">
+                    {% for post in posts %}
+                        {% include 'include/_card.html' %}
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-        <div class="container-fluid px-md-0">
-            <div class="row no-gutters">
-                {% for post in posts %}
-                    {% include 'include/_card.html' %}
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
+    {% endcache %}
 {% endblock %}
 {% block footer %}
-{% include 'include/_footer.html' %}
+    {% include 'include/_footer.html' %}
 
 {% endblock %}
 

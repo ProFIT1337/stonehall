@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cache %}
 
 {% block title %}Проекты{% endblock %}
 
@@ -8,34 +9,36 @@
 {% endblock %}
 
 {% block content %}
+    {% cache 86400 main_content %}
 
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/background.jpg' %});"
-             data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-end">
-                <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{% url 'base' %}">Главная <i
-                            class="ion-ios-arrow-forward"></i></a></span> <span>Проекты <i
-                            class="ion-ios-arrow-forward"></i></span></p>
-                    <h1 class="mb-0 bread">Проекты</h1>
+        <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/background.jpg' %});"
+                 data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-end">
+                    <div class="col-md-9 ftco-animate pb-5">
+                        <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{% url 'base' %}">Главная <i
+                                class="ion-ios-arrow-forward"></i></a></span> <span>Проекты <i
+                                class="ion-ios-arrow-forward"></i></span></p>
+                        <h1 class="mb-0 bread">Проекты</h1>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-        <div class="container-fluid px-md-0">
-            <div class="row no-gutters">
-                {% for post in posts %}
-                    {% include 'include/_card.html' %}
-                {% endfor %}
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container-fluid px-md-0">
+                <div class="row no-gutters">
+                    {% for post in posts %}
+                        {% include 'include/_card.html' %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
 
-    {% include 'include/_pagination.html' %}
+            {% include 'include/_pagination.html' %}
 
-    </section>
+        </section>
+    {% endcache %}
 {% endblock %}
 
