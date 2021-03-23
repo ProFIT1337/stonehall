@@ -11,6 +11,7 @@ def save_post_to_db(request, post, form):
     post.content = form.cleaned_data['content']
     if 'image' in form.cleaned_data:
         post.image = form.cleaned_data['image']
+    post.image_y_offset = form.cleaned_data['image_y_offset']
     post.save()
     messages.add_message(request, messages.SUCCESS, 'Пост успешно изменён')
 

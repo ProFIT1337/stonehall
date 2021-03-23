@@ -3,12 +3,26 @@ from django.contrib.auth.models import User
 
 from blog.models import Post, PostImage
 
-FIELDS_IN_POST_FORM = ['title', 'short_description', 'is_on_main_page', 'content']
+FIELDS_IN_POST_FORM = ['title', 'short_description', 'is_on_main_page', 'content', 'image_y_offset']
 FIELDS_IN_IMAGE_FORM = ['post']
 
 
 class PostForm(forms.ModelForm):
     """Model post form, if image uploaded"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        """Add help_text to image_y_offset field"""
+        self.fields['image_y_offset'].help_text = "Смещение указывается в процентах. " \
+                                                  " Имеет смысл только у вертикальных фотографий." \
+                                                  " Указывается от 0 до 100, где 100 - самая нижняя точка"
+
+    def clean_image_y_offset(self):
+        data = self.cleaned_data['image_y_offset']
+        print(data)
+        if data < 0 or data > 100:
+            raise forms.ValidationError("Значение должно быть от 0 до 100")
+        return data
 
     class Meta:
         model = Post
@@ -18,6 +32,13 @@ class PostForm(forms.ModelForm):
 
 class PostWithoutImageForm(forms.ModelForm):
     """Model post form, if image don`t changed"""
+
+    def clean_image_y_offset(self):
+        data = self.cleaned_data['image_y_offset']
+        print(data)
+        if data < 0 or data > 100:
+            raise forms.ValidationError("Значение должно быть от 0 до 100")
+        return data
 
     class Meta:
         model = Post

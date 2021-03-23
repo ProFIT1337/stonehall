@@ -1,6 +1,7 @@
 <div class="col-md-4 ftco-animate">
     <div class="work img d-flex align-items-end"
-         style="background-image: url({{ post.image.url }});">
+         style="background-image: url({{ post.image.url }});
+                 background-position: center {{ post.image_y_offset }}% !important;">
 
         <a href="{{ post.image.url }}"
            class="icon image-popup d-flex justify-content-center align-items-center">

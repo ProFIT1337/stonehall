@@ -9,6 +9,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название поста')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания')
     image = models.ImageField(verbose_name='Заглавная фотография')
+    image_y_offset = models.IntegerField(verbose_name='Смещение фотографии по оси y', default=0)
     is_on_main_page = models.BooleanField(default=False, verbose_name='Должен ли пост отображаться на главной?')
     short_description = models.CharField(max_length=100, verbose_name='Короткое описание для отображения в некоторых '
                                                                       'местах')
