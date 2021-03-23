@@ -138,6 +138,7 @@ class DeleteSpecificPostView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         post = get_post_with_pk(kwargs.get('pk'))
         post.delete()
+        messages.add_message(request, messages.SUCCESS, 'Пост успешно удалён')
         return HttpResponseRedirect('/администрирование/')
 
 

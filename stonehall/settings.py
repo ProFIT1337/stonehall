@@ -100,3 +100,8 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
     }
 }
+
+if DEBUG:
+    from .settings_prod import *
+else:
+    from .settings_dev import *
