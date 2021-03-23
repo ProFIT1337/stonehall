@@ -3,7 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = True
+DEBUG = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -102,6 +102,6 @@ CACHES = {
 }
 
 if DEBUG:
-    from .settings_prod import *
-else:
     from .settings_dev import *
+else:
+    from .settings_prod import *
