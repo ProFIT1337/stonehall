@@ -17,22 +17,22 @@
             <div class="col-md-4">
                 <div class="list-group">
                     <a href="{% url 'administration_new_post' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/новый-пост/' %}active{% endif %}">Создать
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/new-post/' %}active{% endif %}">Создать
                         новый пост</a>
                     <a href="{% url 'administration_edit_post' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/изменить-пост/' %}active{% endif %}">Изменить
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/edit-post/' %}active{% endif %}">Изменить
                         пост</a>
                     <a href="{% url 'administration_delete_post' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/удалить-пост/' %}active{% endif %}">Удалить
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/remove-post/' %}active{% endif %}">Удалить
                         пост</a>
                     <a href="{% url 'administration_images_list' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/список-фотографий/' %}active{% endif %}">Управление
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/image-list/' %}active{% endif %}">Управление
                         фотографиями</a>
                     <a href="{% url 'administration_add_image' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/добавить-фотографию/' %}active{% endif %}">Добавить
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/add-image/' %}active{% endif %}">Добавить
                         фотографию</a>
                     <a href="{% url 'administration_feedback' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/администрирование/фидбек/' %}active{% endif %}">Фидбек
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/feedback/' %}active{% endif %}">Фидбек
                         {% if unanswered_feedback_qty %}
                             <span class="badge rounded-pill bg-warning">{{ unanswered_feedback_qty }}</span>
                         {% endif %} </a>

@@ -4,6 +4,7 @@ from django.core.cache import cache
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
+from django.urls import reverse
 
 from blog.forms import PostForm, PostWithoutImageForm, ImageForm, ImageWithoutImageForm
 from administration.services import save_post_to_db, add_feedback_qty_badge_to_context, save_image_to_db, \
@@ -35,7 +36,7 @@ class NewPostView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Пост создан')
-            return HttpResponseRedirect('/администрирование')
+            return HttpResponseRedirect(reverse('administration_base'))
         context = {'form': form}
         context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_new_post.html', context)
@@ -60,7 +61,7 @@ class FeedbackAnsweredView(LoginRequiredMixin, View):
         question_pk = kwargs.get('pk')
         is_answered = bool(request.POST.get('is_answered'))
         save_question_is_answered_field_to_db(request, question_pk, is_answered)
-        return HttpResponseRedirect('/администрирование/фидбек')
+        return HttpResponseRedirect(reverse('administration_feedback'))
 
 
 class FeedbackDeleteView(LoginRequiredMixin, View):
@@ -71,7 +72,7 @@ class FeedbackDeleteView(LoginRequiredMixin, View):
         question = get_question_with_pk(question_pk)
         question.delete()
         messages.add_message(request, messages.SUCCESS, 'Фидбек удалён')
-        return HttpResponseRedirect('/администрирование/фидбек')
+        return HttpResponseRedirect(reverse('administration_feedback'))
 
 
 class EditPostView(LoginRequiredMixin, View):
@@ -106,11 +107,11 @@ class EditSpecificPostView(LoginRequiredMixin, View):
 
         if form_with_image.is_valid():
             save_post_to_db(request, post, form_with_image)
-            return HttpResponseRedirect('/администрирование/')
+            return HttpResponseRedirect(reverse('administration_base'))
 
         if form_without_image.is_valid():
             save_post_to_db(request, post, form_with_image)
-            return HttpResponseRedirect('/администрирование/')
+            return HttpResponseRedirect(reverse('administration_base'))
 
         context = {
             'form': form_with_image,
@@ -139,7 +140,7 @@ class DeleteSpecificPostView(LoginRequiredMixin, View):
         post = get_post_with_pk(kwargs.get('pk'))
         post.delete()
         messages.add_message(request, messages.SUCCESS, 'Пост успешно удалён')
-        return HttpResponseRedirect('/администрирование/')
+        return HttpResponseRedirect(reverse('administration_base'))
 
 
 class ImagesListView(LoginRequiredMixin, View):
@@ -168,7 +169,7 @@ class NewImageView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Фотография добавлена')
-            return HttpResponseRedirect('/администрирование/')
+            return HttpResponseRedirect(reverse('administration'))
         context = {'form': form}
         context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_new_image.html', context)
@@ -194,10 +195,10 @@ class ImageEditView(LoginRequiredMixin, View):
 
         if form_with_image.is_valid():
             save_image_to_db(request, image, form_with_image)
-            return HttpResponseRedirect('/администрирование/')
+            return HttpResponseRedirect(reverse('administration_base'))
         if form_without_image.is_valid():
             save_image_to_db(request, image, form_without_image)
-            return HttpResponseRedirect('/администрирование/')
+            return HttpResponseRedirect(reverse('administration_base'))
 
         context = {
             'form': form_with_image,
@@ -214,11 +215,11 @@ class ImageDeleteView(LoginRequiredMixin, View):
         image = get_image_with_pk(kwargs.get('pk'))
         image.delete()
         messages.add_message(request, messages.SUCCESS, 'Изображение успешно удалено')
-        return HttpResponseRedirect('/администрирование/')
+        return HttpResponseRedirect(reverse('administration_base'))
 
 
 def clear_cache(request):
     """Clears the cache to update data from the database"""
     cache.clear()
     messages.add_message(request, messages.SUCCESS, 'Данные успешно обновлены из базы')
-    return HttpResponseRedirect('/администрирование/')
+    return HttpResponseRedirect(reverse('administration_base'))

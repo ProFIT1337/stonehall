@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, ListView
+from django.urls import reverse
 
 from blog.forms import LoginForm
 from blog.models import Post
@@ -46,7 +47,7 @@ class ContactView(View):
         bound_form = QuestionForm(request.POST)
         if bound_form.is_valid():
             save_question_to_db(request, bound_form)
-            return HttpResponseRedirect('/контакты')
+            return HttpResponseRedirect(reverse('contact'))
         context = {
             'form': bound_form,
         }

@@ -4,6 +4,7 @@ from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
+
 from . import settings
 
 urlpatterns = [

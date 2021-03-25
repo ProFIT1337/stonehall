@@ -1,17 +1,16 @@
 import os
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['u1333982.isp.regruhosting.ru', 'www.u1333982.isp.regruhosting.ru']
 
 SECRET_KEY = '*)_dq)$**@msqrwwp!0gxq)7&17ym6-mgmt8d+d_oz9mf=80-!'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stonehall_db',
-        'USER': 'stonehall_user',
-        'PASSWORD': 'devpass',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u1333982_default',
+        'USER': 'u1333982_default',
+        'PASSWORD': 'HfIoZl!9',
         'HOST': '127.0.0.1',
-        'PORT': 5432
     }
 }
 
