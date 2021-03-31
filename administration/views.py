@@ -169,7 +169,7 @@ class NewImageView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Фотография добавлена')
-            return HttpResponseRedirect(reverse('administration'))
+            return HttpResponseRedirect(reverse('administration_base'))
         context = {'form': form}
         context = add_feedback_qty_badge_to_context(context)
         return render(request, 'administration_new_image.html', context)
