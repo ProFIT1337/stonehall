@@ -218,6 +218,16 @@ class ImageDeleteView(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse('administration_base'))
 
 
+class ChangeSerialNumber(LoginRequiredMixin, View):
+    """Endpoint to change serial number of post"""
+
+    def post(self, request, *args, **kwargs):
+        post = get_post_with_pk(kwargs.get('pk'))
+        post.serial_number = request.POST.get('serial_number')
+        post.save()
+        return HttpResponseRedirect(reverse('administration_edit_post'))
+
+
 def clear_cache(request):
     """Clears the cache to update data from the database"""
     cache.clear()

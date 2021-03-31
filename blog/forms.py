@@ -3,23 +3,22 @@ from django.contrib.auth.models import User
 
 from blog.models import Post, PostImage
 
-FIELDS_IN_POST_FORM = ['title', 'short_description', 'is_on_main_page', 'content', 'image_y_offset']
-FIELDS_IN_IMAGE_FORM = ['post']
+FIELDS_IN_POST_FORM = ['title', 'short_description', 'is_on_main_page', 'content', 'image_y_offset', 'serial_number']
+FIELDS_IN_IMAGE_FORM = ['post', 'description']
 
 
 class PostForm(forms.ModelForm):
     """Model post form, if image uploaded"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         """Add help_text to image_y_offset field"""
+        super().__init__(*args, **kwargs)
         self.fields['image_y_offset'].help_text = "Смещение указывается в процентах. " \
                                                   " Имеет смысл только у вертикальных фотографий." \
                                                   " Указывается от 0 до 100, где 100 - самая нижняя точка"
 
     def clean_image_y_offset(self):
         data = self.cleaned_data['image_y_offset']
-        print(data)
         if data < 0 or data > 100:
             raise forms.ValidationError("Значение должно быть от 0 до 100")
         return data

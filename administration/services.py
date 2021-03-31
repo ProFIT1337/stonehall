@@ -9,6 +9,7 @@ def save_post_to_db(request, post, form):
     post.short_description = form.cleaned_data['short_description']
     post.is_on_main_page = form.cleaned_data['is_on_main_page']
     post.content = form.cleaned_data['content']
+    post.serial_number = form.cleaned_data['serial_number']
     if 'image' in form.cleaned_data:
         post.image = form.cleaned_data['image']
     post.image_y_offset = form.cleaned_data['image_y_offset']
@@ -27,6 +28,7 @@ def add_feedback_qty_badge_to_context(context):
 def save_image_to_db(request, image, form):
     """Save changed image to db, with or without changed image"""
     image.post = form.cleaned_data['post']
+    image.description = form.cleaned_data['description']
     if 'image' in form.cleaned_data:
         image.image = form.cleaned_data['image']
     image.save()

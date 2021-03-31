@@ -20,8 +20,8 @@
                        class="list-group-item list-group-item-action {% if request.path == '/administration/new-post/' %}active{% endif %}">Создать
                         новый пост</a>
                     <a href="{% url 'administration_edit_post' %}"
-                       class="list-group-item list-group-item-action {% if request.path == '/administration/edit-post/' %}active{% endif %}">Изменить
-                        пост</a>
+                       class="list-group-item list-group-item-action {% if request.path == '/administration/edit-post/' %}active{% endif %}">Управление
+                        постами</a>
                     <a href="{% url 'administration_delete_post' %}"
                        class="list-group-item list-group-item-action {% if request.path == '/administration/remove-post/' %}active{% endif %}">Удалить
                         пост</a>
@@ -36,7 +36,8 @@
                         {% if unanswered_feedback_qty %}
                             <span class="badge rounded-pill bg-warning">{{ unanswered_feedback_qty }}</span>
                         {% endif %} </a>
-                    <a href="{% url 'delete_cache' %}" class="list-group-item list-group-item-action">Обновить информацию из базы данных</a>
+                    <a href="{% url 'delete_cache' %}" class="list-group-item list-group-item-action">Обновить
+                        информацию из базы данных</a>
                     <a href="{% url 'logout' %}" class="list-group-item list-group-item-action">Выйти из аккаунта</a>
                 </div>
             </div>

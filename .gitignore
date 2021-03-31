@@ -1,6 +1,7 @@
 db.sqlite3
 setenv.sh
 settings_prod.py
+settings_dev.py
 
 **/__pycache__/
 /venv

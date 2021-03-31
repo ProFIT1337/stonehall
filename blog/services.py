@@ -13,7 +13,7 @@ def get_posts_for_main_page():
 
 def get_all_posts():
     """Returns all posts. Ordered by created date"""
-    posts = Post.objects.order_by('-created_at')
+    posts = Post.objects.all()
     return posts
 
 

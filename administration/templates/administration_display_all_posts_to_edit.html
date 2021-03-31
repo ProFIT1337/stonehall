@@ -6,6 +6,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th scope="col">Приоритет при отображении</th>
                 <th scope="col">Дата создания</th>
                 <th scope="col">Название</th>
                 <th scope="col">Изображение</th>
@@ -17,6 +18,13 @@
             <tbody>
             {% for post in posts %}
                 <tr>
+                    <td style="min-width: 200px;" class="row">
+                        <form action="{% url 'administration_change_serial_number' pk=post.pk %}" method="post">
+                            {% csrf_token %}
+                            <input class="col-md-6" type="number" name="serial_number" value="{{ post.serial_number }}">
+                            <input type="submit" class="btn btn-success col-md-6 mt-1" value="Ок">
+                        </form>
+                    </td>
                     <td>{{ post.created_at|naturaltime }}.</td>
                     <td>{{ post.title }}.</td>
                     <td class="w-25"><img src="{{ post.image.url }}" class="img-fluid"></td>

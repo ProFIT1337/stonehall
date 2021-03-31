@@ -15,7 +15,8 @@ from administration.views import \
     ImageDeleteView, \
     ImageEditView, \
     NewImageView, \
-    clear_cache
+    clear_cache, \
+    ChangeSerialNumber
 
 urlpatterns = [
     path('', AdministrationBaseView.as_view(), name='administration_base'),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('new-post/', NewPostView.as_view(), name='administration_new_post'),
     path('edit-post/', EditPostView.as_view(), name='administration_edit_post'),
     path('edit-specific-post/<int:pk>/', EditSpecificPostView.as_view(), name='administration_edit_specific_post'),
+    path('change_serial_number/<int:pk>/', ChangeSerialNumber.as_view(), name='administration_change_serial_number'),
     path('remove-post/', DeletePostView.as_view(), name='administration_delete_post'),
     path('remove-specific-post/<int:pk>/', DeleteSpecificPostView.as_view(),
          name='administration_delete_specific_post'),
