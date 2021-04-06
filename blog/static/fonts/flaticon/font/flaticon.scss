@@ -1,5 +1,7 @@
+$flaticon-font: "flaticon";
+
 @font-face {
-    font-family: "flaticon";
+    font-family: $flaticon-font;
     src: url("./flaticon.ttf?da36263d65bd040253a56ef8d6e5fb3b") format("truetype"),
 url("./flaticon.woff?da36263d65bd040253a56ef8d6e5fb3b") format("woff"),
 url("./flaticon.woff2?da36263d65bd040253a56ef8d6e5fb3b") format("woff2"),
@@ -7,7 +9,7 @@ url("./flaticon.eot?da36263d65bd040253a56ef8d6e5fb3b#iefix") format("embedded-op
 url("./flaticon.svg?da36263d65bd040253a56ef8d6e5fb3b#flaticon") format("svg");
 }
 
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before {
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
     font-family: flaticon !important;
     font-style: normal;
     font-weight: normal !important;
@@ -18,28 +20,38 @@ url("./flaticon.svg?da36263d65bd040253a56ef8d6e5fb3b#flaticon") format("svg");
     -moz-osx-font-smoothing: grayscale;
 }
 
+$flaticon-map: (
+    "engineer": "\f101",
+    "fire": "\f102",
+    "fireplace": "\f103",
+    "home": "\f104",
+    "money-bag": "\f105",
+    "pawprint": "\f106",
+    "shower": "\f107",
+    "winner": "\f108",
+);
 
 .flaticon-engineer:before {
-    content: "\f101";
+    content: map-get($flaticon-map, "engineer");
 }
 .flaticon-fire:before {
-    content: "\f102";
+    content: map-get($flaticon-map, "fire");
 }
 .flaticon-fireplace:before {
-    content: "\f103";
+    content: map-get($flaticon-map, "fireplace");
 }
 .flaticon-home:before {
-    content: "\f104";
+    content: map-get($flaticon-map, "home");
 }
 .flaticon-money-bag:before {
-    content: "\f105";
+    content: map-get($flaticon-map, "money-bag");
 }
 .flaticon-pawprint:before {
-    content: "\f106";
+    content: map-get($flaticon-map, "pawprint");
 }
 .flaticon-shower:before {
-    content: "\f107";
+    content: map-get($flaticon-map, "shower");
 }
 .flaticon-winner:before {
-    content: "\f108";
+    content: map-get($flaticon-map, "winner");
 }
